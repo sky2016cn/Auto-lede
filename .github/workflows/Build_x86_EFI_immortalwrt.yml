@@ -107,10 +107,10 @@ jobs:
         df -h
 
     - name: Clone source code
-      env: 
+      env:
         REPO_URL: https://github.com/immortalwrt/immortalwrt
       run: |
-        git clone --depth 1 -b v24.10.4 --single-branch --filter=blob:none $REPO_URL immortalwrt || { echo 'Git clone failed!'; exit 1; }
+        git clone --depth 1 -b openwrt-24.10 --single-branch --filter=blob:none $REPO_URL immortalwrt || { echo 'Git clone failed!'; exit 1; }
         cd immortalwrt
       #echo "src-git helloworld https://github.com/fw876/helloworld.git" >> ./feeds.conf.default
       #echo "src-git passwall_packages https://github.com/xiaorouji/openwrt-passwall-packages.git;main" >> ./feeds.conf.default
