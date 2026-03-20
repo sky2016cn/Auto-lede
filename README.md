@@ -3,14 +3,13 @@
 ---
 
    ## 📚 目录
-- [📖 动态 DNS](#-二选一)
 - [📖 云编译 Lede](#-云编译Lede)
 - [📖 云编译 immortalwrt](#-云编译immortalwrt)
 - [📖 云编译 immortalwrt-mt798x](#-云编译immortalwrt-mt798x)
 
 ---
 
-## 📖 云编译 Lede
+## 📖 云编译Lede
 
 1. 更新依赖包
 
@@ -44,7 +43,7 @@
    
 ---
 
-## 📖 云编译 immortalwrt
+## 📖 云编译immortalwrt
 
 1. 编译前，可以选择immortalwrt分支编译，在脚本的拉取命令“-b openwrt-24.10”分支，替换成最新“-b openwrt-25.12”分支，即可编译openwrt-25.12
 
@@ -70,7 +69,7 @@
 
 ---
 
-## 📖 云编译 immortalwrt-mt798x
+## 📖 云编译immortalwrt-mt798x
 
 1. 更新依赖包
 - 方法1：自动更新（推荐，目前编译脚本使用此方法）
@@ -104,17 +103,4 @@
 - CONFIG_PACKAGE_ca-bundle=y
 - EOF
   
----
-
-## 📖 动态 DNS
-- 按需添加到 config 文件中
-
-- 二选一
-- 动态 DNS
-- CONFIG_PACKAGE_ddns-scripts-cloudflare=y
-- CONFIG_PACKAGE_luci-app-ddns=y
-- 或
-- ddns-go
-- CONFIG_PACKAGE_luci-app-ddns-go=y
-
 ---
