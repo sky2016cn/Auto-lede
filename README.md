@@ -40,42 +40,14 @@
 6. 编译完成后，请检查编译过程是否出错。
   
    尤其注意“Initialization environment”安装依赖包部分，展开来细看是否出错
-
-7. 下方“Build_xxx.yml”脚本中的八大部分参考：https://github.com/dzlea/ActionsBuildOpenWRT/tree/main/.github/workflows
-   
-- jobs:
-  - build:
-    - runs-on: ubuntu-22.04  //注意ubuntu版本号
-
-    - name: Before freeing up disk space
-
-    - name: "Optimize Disk Space"
-      uses: "hugoalh/disk-space-optimizer-ghaction@v0.8.1"   //注意“@v0.8.1”版本号
-
-    - name: Freeing up disk space
-     
-    - name: Free up disk space complete
-     
-    - name: Checkout
-      uses: actions/checkout@master  //原文末尾是“@main”，可自己定义
-
-    - name: Initialization environment
-     
-    - name: Check Space
-
-- 余下部分参考：https://github.com/esirplayground/AutoBuild-OpenWrt
-
-- 在此感谢dzlea、esirplayground两位原作者的付出！
    
 ---
 
 ## 📖 云编译immortalwrt
 
-1. 编译前，更新脚本，将拉取命令中“v24.10.0”替换成最新 Stable Release 版本号，才能编译成功
-       
-   获取最新 Stable Release 版本号：https://downloads.immortalwrt.org/
+1. 编译前，可以选择immortalwrt分支编译，在脚本的拉取命令“-b openwrt-24.10”分支，替换成最新“-b openwrt-25.12”分支，即可编译openwrt-25.12
 
-2. 更新依赖包
+2.更新依赖包
 - 方法1：自动更新（推荐，目前编译脚本使用此方法）
 - 打开官网：https://github.com/immortalwrt/immortalwrt
 - 左上角选择对应的版本号
