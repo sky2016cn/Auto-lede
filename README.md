@@ -3,6 +3,7 @@
 ---
 
    ## 📚 目录
+- [📖 动态 DNS](#-动态DNS)   
 - [📖 云编译 Lede](#-云编译Lede)
 - [📖 云编译 immortalwrt](#-云编译immortalwrt)
 - [📖 云编译 immortalwrt-mt798x](#-云编译immortalwrt-mt798x)
@@ -103,4 +104,18 @@
 - CONFIG_PACKAGE_ca-bundle=y
 - EOF
   
+---
+
+## 📖 动态DNS
+
+- 按需添加到 config 文件中
+
+- 二选一
+1. 动态 DNS
+- CONFIG_PACKAGE_ddns-scripts-cloudflare=y
+- CONFIG_PACKAGE_luci-app-ddns=y
+
+2. ddns-go
+- CONFIG_PACKAGE_luci-app-ddns-go=y
+
 ---
