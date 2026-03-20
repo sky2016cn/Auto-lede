@@ -97,11 +97,11 @@ jobs:
       run: |
         git clone --depth 1 -b openwrt-24.10 --single-branch --filter=blob:none $REPO_URL immortalwrt || { echo 'Git clone failed!'; exit 1; }
         cd immortalwrt
-      #echo "src-git passwall_packages https://github.com/Openwrt-Passwall/openwrt-passwall-packages.git;main" >> ./feeds.conf.default
-      #echo "src-git passwall_luci https://github.com/Openwrt-Passwall/openwrt-passwall.git;main" >> ./feeds.conf.default
-      #immoralwrt 默认添加了 passwall
-      #若要使用 passwall2 请到官网下载apk，按照官网的方法安装到路由器：https://github.com/Openwrt-Passwall/openwrt-passwall2
-                
+      # echo "src-git passwall_packages https://github.com/Openwrt-Passwall/openwrt-passwall-packages.git;main" >> ./feeds.conf.default
+      # echo "src-git passwall_luci https://github.com/Openwrt-Passwall/openwrt-passwall.git;main" >> ./feeds.conf.default
+      # echo "src-git passwall2_luci https://github.com/Openwrt-Passwall/openwrt-passwall2.git;main" >> ./feeds.conf.default
+      # immoralwrt 默认添加了 passwall,若要使用 passwall2,只需最后一行 passwall2_luci 去掉注释即可，官方查询：https://github.com/immortalwrt/luci/tree/master/applications
+                 
     - name: Update feeds
       working-directory: ./immortalwrt
       run: |
