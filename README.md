@@ -123,15 +123,15 @@
 
 ## 📖 删除的自带插件
 1. 上网时间控制：只有 LEDE 固件才默认自带
-- # CONFIG_PACKAGE_luci-app-accesscontrol is not set
+- “# CONFIG_PACKAGE_luci-app-accesscontrol is not set”
 2. 动态 DNS：只有 LEDE 固件才默认自带
-- # CONFIG_PACKAGE_luci-app-ddns is not set
+- “# CONFIG_PACKAGE_luci-app-ddns is not set”
 3. 带宽监控：不需要
-- # CONFIG_PACKAGE_luci-app-nlbwmon is not set
+- “# CONFIG_PACKAGE_luci-app-nlbwmon is not set”
 4. UpnP：自动端口转发，开放外网端口，PT下载、 NAS 外网访问才需要
-- # CONFIG_PACKAGE_luci-app-upnp is not set
+- “# CONFIG_PACKAGE_luci-app-upnp is not set”
 5. 网络唤醒：用来唤醒其他主机，可以保留
-- # CONFIG_PACKAGE_luci-app-wol is not set
+- “# CONFIG_PACKAGE_luci-app-wol is not set”
 
 ---
 
