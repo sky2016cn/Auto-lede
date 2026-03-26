@@ -183,7 +183,7 @@ jobs:
         df -h
         
     - name: Upload artifact
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: ax6000_immortalwrt
         path: immortalwrt/bin
