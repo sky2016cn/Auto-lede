@@ -3,7 +3,8 @@
 ---
 
    ## 📚 目录
-- [📖 动态 DNS](#-动态DNS)   
+- [📖 动态 DNS](#-动态DNS)
+- [📖 删除的自带插件](#-删除的自带插件) 
 - [📖 云编译 Lede](#-云编译Lede)
 - [📖 云编译 immortalwrt](#-云编译immortalwrt)
 - [📖 云编译 immortalwrt-mt798x](#-云编译immortalwrt-mt798x)
@@ -110,7 +111,7 @@
 
 - 按需添加到 config 文件中
 
-- 二选一
+- 安装“动态DNS”可二选一
 1. 动态 DNS
 - CONFIG_PACKAGE_ddns-scripts-cloudflare=y
 - CONFIG_PACKAGE_luci-app-ddns=y
@@ -119,3 +120,18 @@
 - CONFIG_PACKAGE_luci-app-ddns-go=y
 
 ---
+
+## 📖 删除的自带插件
+1. 上网时间控制：只有 LEDE 固件才默认自带
+- # CONFIG_PACKAGE_luci-app-accesscontrol is not set
+2. 动态 DNS：只有 LEDE 固件才默认自带
+- # CONFIG_PACKAGE_luci-app-ddns is not set
+3. 带宽监控：不需要
+- # CONFIG_PACKAGE_luci-app-nlbwmon is not set
+4. UpnP：自动端口转发，开放外网端口，PT下载、 NAS 外网访问才需要
+- # CONFIG_PACKAGE_luci-app-upnp is not set
+5. 网络唤醒：用来唤醒其他主机，可以保留
+- # CONFIG_PACKAGE_luci-app-wol is not set
+
+---
+
