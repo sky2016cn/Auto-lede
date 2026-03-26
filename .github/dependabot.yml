@@ -1,0 +1,19 @@
+# 监控并及时升级脚本中的“actions”版本，提高编译OpenWrt的成功率
+# 监控脚本中的官方“actions”：uses: actions/checkout@v...，用来把脚本中的代码拉取到 Github 服务器上进行编译，官方地址：https://github.com/actions/checkout
+# 监控脚本中的官方“actions”：actions/upload-artifact@v...，用来把编译好的固件上传到 Github 服务器上，官方地址：https://github.com/actions/upload-artifact
+# 不修改，不升级，跳过脚本中的第三方磁盘空间扩容"actions"：uses: easimon/maximize-build-space@master，使用“@master”，会自动使用最新版本，不需要升级。地址：https://github.com/easimon/maximize-build-space
+
+version: 2
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"                    # 监控整个仓库的所有 workflow（包括你的10个版本）
+    schedule:
+      interval: "quarterly"           # 每3个月检查一次（适合3个月编译一次）
+    open-pull-requests-limit: 5       # 最多同时打开5个PR
+    labels:
+      - "dependencies"
+      - "github-actions"
+
+    # 防止 dependabot.yml 自动修改第三方磁盘空间扩容 actions："easimon/maximize-build-space"，导致编译失败
+    ignore:
+      - dependency-name: "easimon/maximize-build-space"
