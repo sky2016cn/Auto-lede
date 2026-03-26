@@ -57,7 +57,7 @@ jobs:
         echo "=============================================================================="
 
     - name: Checkout repository
-      uses: actions/checkout@v4        
+      uses: actions/checkout@v6        
 
     # 如果“Initialization environment”报错，是因为官方 APT 设置依赖项的脚本已经不合时宜，在官方修正之前，请使用下方的代码
     - name: Initialization environment
@@ -183,7 +183,7 @@ jobs:
         df -h
         
     - name: Upload artifact
-      uses: actions/upload-artifact@master
+      uses: actions/upload-artifact@v4
       with:
         name: ax6000_immortalwrt
         path: immortalwrt/bin
