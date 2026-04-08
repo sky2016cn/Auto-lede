@@ -6,16 +6,6 @@
 # See /LICENSE for more information
 # Description: Build OpenWrt using GitHub Actions
 #=================================================
-
-# 解锁 Bdata (身份证信息)
-sed -i '/label = "Bdata"/,/read-only;/ s/read-only;//' openwrt/target/linux/mediatek/dts/mt7986a-xiaomi-redmi-router-ax6000.dts
-
-# 解锁 Factory (无线信号校准)
-sed -i '/label = "Factory"/,/read-only;/ s/read-only;//' openwrt/target/linux/mediatek/dts/mt7986a-xiaomi-redmi-router-ax6000.dts
-
-# 解锁 Nvram (如果你也想恢复它)
-sed -i '/label = "Nvram"/,/read-only;/ s/read-only;//' openwrt/target/linux/mediatek/dts/mt7986a-xiaomi-redmi-router-ax6000.dts
-
 #1. Modify default IP
 sed -i 's/192.168.1.1/192.168.2.1/g' openwrt/package/base-files/files/bin/config_generate
 
