@@ -98,7 +98,6 @@ jobs:
         REPO_URL: https://github.com/hanwckf/immortalwrt-mt798x
       run: |
         git clone --depth=1 $REPO_URL immortalwrt || { echo 'Git clone failed!'; exit 1; }
-        cd immortalwrt
         
     - name: Update feeds
       working-directory: ./immortalwrt
