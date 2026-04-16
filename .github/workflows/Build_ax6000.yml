@@ -83,9 +83,9 @@ jobs:
       run: |
         git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
         cd openwrt
-        echo "src-git helloworld https://github.com/fw876/helloworld.git" >> ./feeds.conf.default
+        # echo "src-git helloworld https://github.com/fw876/helloworld.git" >> ./feeds.conf.default
         # ======== 编译 passwall 最新版 =========
-        # Lede插件库已经包含 passwall，若要一起使用，不建议自编译passwall最新版，打开Lede官方插件库查询：https://github.com/coolsnowwolf/lede/blob/master/feeds.conf.default（打开luci仓库找到“applications”查询插件）
+        # Lede插件库已经包含 passwall，不建议自编译 passwall最新版，与 helloword整合一起可能造成固件的不稳定，两者若要一起编入固件，建议使用 Lede官方源码，打开Lede官方插件库查询：https://github.com/coolsnowwolf/lede/blob/master/feeds.conf.default（打开luci仓库找到“applications”查询插件）
         # 若要编译 passwall最新版，去掉注释，再注释掉上面的 helloworld，此命令会在 feeds.conf.default文件，第 1 行插入 passwall_packages
         sed -i '1i src-git my_passwall_packages https://github.com/Openwrt-Passwall/openwrt-passwall-packages.git;main' feeds.conf.default
 
