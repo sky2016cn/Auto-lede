@@ -93,7 +93,7 @@ jobs:
       run: |
         df -h
 
-       # 注意：immortalwrt_mt798x源代码不支持更新源码中的插件，否则编译失败，也不建议添加第三方插件，造成固件不稳定
+       # 注意：immortalwrt_mt798x不建议自行更新源码中的插件，容易编译失败，也不建议添加第三方插件，造成固件不稳定
     - name: Clone source code
       env: 
         REPO_URL: https://github.com/hanwckf/immortalwrt-mt798x
