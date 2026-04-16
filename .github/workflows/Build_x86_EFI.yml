@@ -121,6 +121,7 @@ jobs:
       run: |
         # 先删除 feeds安装命令中的 OpenClash旧版
         ./scripts/feeds uninstall luci-app-openclash
+        # 再重新拉取 openclash最新版
         git clone --depth=1 https://github.com/vernesong/OpenClash.git package/OpenClash
         mv package/OpenClash/luci-app-openclash package
         rm -rf package/OpenClash
