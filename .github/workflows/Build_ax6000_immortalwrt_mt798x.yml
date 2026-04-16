@@ -108,9 +108,9 @@ jobs:
         sed -i '1i src-git my_passwall_luci https://github.com/Openwrt-Passwall/openwrt-passwall.git;main' feeds.conf.default
 
         # passwall 和 passwall2 不要一起编译，编译出来的固件会不稳定，若要使用 passwall2，先注释上面 passwall_luci，再去掉下面注释，打开 immortalwrt_mt798x官方插件库查询：https://github.com/hanwckf/immortalwrt-mt798x（打开 feeds.conf.default文件，再打开luci仓库找到“applications”查询插件）        
-        # sed -i '1i src-git my_passwall2_luci https://github.com/Openwrt-Passwall/openwrt-passwall2.git;main' feeds.conf.default
+        #sed -i '1i src-git my_passwall2_luci https://github.com/Openwrt-Passwall/openwrt-passwall2.git;main' feeds.conf.default
         
-    # immoralwrt_mt798x 默认添加了 OpenClash，若要编译最新版，去掉下面注释，会自动编译 OpenClash最新版，但必须放在运行更新 feeds 命令之前。打开 immortalwrt_mt798x官方插件库查询：https://github.com/hanwckf/immortalwrt-mt798x（打开 feeds.conf.default文件，再打开luci仓库找到“applications”查询插件）      
+    # immoralwrt_mt798x 默认添加了 OpenClash，若要编译最新版，去掉下面注释，会自动忽略源码旧版本，编译 OpenClash最新版，但必须放在运行更新 feeds 命令之前。打开 immortalwrt_mt798x官方插件库查询：https://github.com/hanwckf/immortalwrt-mt798x（打开 feeds.conf.default文件，再打开luci仓库找到“applications”查询插件）      
     - name: Import external feeds - OpenClash
       working-directory: ./immortalwrt
       run: |
