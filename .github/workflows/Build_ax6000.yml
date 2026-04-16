@@ -84,11 +84,15 @@ jobs:
         git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
         cd openwrt
         echo "src-git helloworld https://github.com/fw876/helloworld.git" >> ./feeds.conf.default
-      # Lede插件库已经包含passwall,没必要再添加passwall，Lede插件库官方查询：https://github.com/coolsnowwolf/luci/tree/master/applications
-        echo "src-git my_passwall_packages https://github.com/Openwrt-Passwall/openwrt-passwall-packages.git;main" >> ./feeds.conf.default
-        echo "src-git my_passwall_luci https://github.com/Openwrt-Passwall/openwrt-passwall.git;main" >> ./feeds.conf.default
-      #echo "src-git my_passwall2_luci https://github.com/Openwrt-Passwall/openwrt-passwall2.git;main" >> ./feeds.conf.default
-      #passwall和passwall2不要一起编译，编译出来的固件会不稳定，若要使用 passwall2,最后一行 passwall2_luci 去掉注释即可，Lede插件库官方查询：https://github.com/coolsnowwolf/luci/tree/master/applications
+      # Lede插件库已经包含passwall,没必要再添加passwall，打开Lede官方插件库查询：https://github.com/coolsnowwolf/lede/blob/master/feeds.conf.default（打开luci 的仓库地址找到“applications”查询插件）
+      # 若要编译passwall最新版，在第 1 行插入 passwall_packages
+        sed -i '1i src-git my_passwall_packages https://github.com/Openwrt-Passwall/openwrt-passwall-packages.git;main' feeds.conf.default
+
+      # 再次在第 1 行插入 passwall_luci (这样它就变成了第 1 行，packages 变成了第 2 行)
+        sed -i '1i src-git my_passwall_luci https://github.com/Openwrt-Passwall/openwrt-passwall.git;main' feeds.conf.default
+      # passwall和passwall2不要一起编译，编译出来的固件会不稳定，若要使用 passwall2，下面一行 passwall2_luci 去掉注释即可，打开Lede官方插件库查询：https://github.com/coolsnowwolf/lede/blob/master/feeds.conf.default（打开luci 的仓库地址找到“applications”查询插件）        
+      # sed -i '1i src-git my_passwall2_luci https://github.com/Openwrt-Passwall/openwrt-passwall2.git;main' feeds.conf.default
+
 
     # 范例 1: 注意拉取命令的保存路径
     #- name: Import external feeds - OpenAppFilter
@@ -110,6 +114,20 @@ jobs:
       working-directory: ./openwrt
       run: |
         ./scripts/feeds install -a
+
+    # Lede 默认添加了 Openclash，若要编译最新版，去掉下面注释
+    - name: Import external feeds - OpenClash
+      working-directory: ./openwrt
+      run: |
+     # 卸载 feeds 里的 Openclash旧版关联
+        ./scripts/feeds uninstall luci-app-openclash
+     # 删除 Openclash 旧版源码
+        rm -rf feeds/luci/applications/luci-app-openclash*
+        rm -rf package/feeds/luci/luci-app-openclash*
+     # 重新拉取 OpenClash 最新源码，打开Lede官方插件库查询：https://github.com/coolsnowwolf/lede/blob/master/feeds.conf.default（打开luci 的仓库地址找到“applications”查询插件）    
+        git clone --depth=1 https://github.com/vernesong/OpenClash.git package/OpenClash
+        mv package/OpenClash/luci-app-openclash package
+        rm -rf package/OpenClash
 
     - name: Import external feeds - OpenClash
       working-directory: ./openwrt
