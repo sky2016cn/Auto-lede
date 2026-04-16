@@ -95,12 +95,6 @@ jobs:
         # passwall 和 passwall2 不要一起编译，编译出来的固件会不稳定，若要使用 passwall2，先注释上面 passwall_luci，再去掉下面注释，打开Lede官方插件库查询：https://github.com/coolsnowwolf/lede/blob/master/feeds.conf.default（打开luci仓库找到“applications”查询插件）        
         #sed -i '1i src-git my_passwall2_luci https://github.com/Openwrt-Passwall/openwrt-passwall2.git;main' feeds.conf.default
 
-    # 范例 1: 注意拉取命令的保存路径
-    #- name: Import external feeds - OpenAppFilter
-    #  working-directory: ./openwrt
-    #  run: |
-    #    git clone https://github.com/destan19/OpenAppFilter.git package/OpenAppFilter
-
     - name: Update feeds
       working-directory: ./openwrt
       run: |
@@ -115,6 +109,12 @@ jobs:
       working-directory: ./openwrt
       run: |
         ./scripts/feeds install -a
+
+    # 范例 1: 注意拉取命令的保存路径
+    #- name: Import external feeds - OpenAppFilter
+    #  working-directory: ./openwrt
+    #  run: |
+    #    git clone https://github.com/destan19/OpenAppFilter.git package/OpenAppFilter
   
     - name: Configuration Customization - Build_cr660x
       env:
