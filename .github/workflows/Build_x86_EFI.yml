@@ -116,15 +116,15 @@ jobs:
         git clone https://github.com/sky2016cn/luci-app-poweroff.git package/luci-app-poweroff
 
     # Lede 默认添加了 Openclash，若要编译最新版，去掉下面注释，会先删除源码旧版本，再重新拉取 openclash最新版，打开Lede官方插件库查询：https://github.com/coolsnowwolf/lede/blob/master/feeds.conf.default（打开luci仓库找到“applications”查询插件）      
-    - name: Import external feeds - OpenClash
-      working-directory: ./openwrt
-      run: |
+    #- name: Import external feeds - OpenClash
+    #  working-directory: ./openwrt
+    #  run: |
         # 先删除 feeds安装命令中的 OpenClash旧版
-        ./scripts/feeds uninstall luci-app-openclash
+    #    ./scripts/feeds uninstall luci-app-openclash
         # 再重新拉取 openclash最新版
-        git clone --depth=1 https://github.com/vernesong/OpenClash.git package/OpenClash
-        mv package/OpenClash/luci-app-openclash package
-        rm -rf package/OpenClash
+    #    git clone --depth=1 https://github.com/vernesong/OpenClash.git package/OpenClash
+    #    mv package/OpenClash/luci-app-openclash package
+    #    rm -rf package/OpenClash
 
     # 范例 1: 注意拉取命令的保存路径
     #- name: Import external feeds - OpenAppFilter
