@@ -137,7 +137,6 @@ jobs:
       run: |
         ./scripts/feeds install -a
 
-
     - name: Configuration Customization - Build_ax9000_immortalwrt
       env:
         CONFIG_FILE: 'ax9000_immortalwrt.config'
