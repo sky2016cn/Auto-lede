@@ -96,12 +96,32 @@ jobs:
         REPO_URL: https://github.com/immortalwrt/immortalwrt
       run: |
         git clone --depth 1 -b openwrt-24.10 --single-branch --filter=blob:none $REPO_URL immortalwrt || { echo 'Git clone failed!'; exit 1; }
-        cd immortalwrt
-      # echo "src-git passwall_packages https://github.com/Openwrt-Passwall/openwrt-passwall-packages.git;main" >> ./feeds.conf.default
-      # echo "src-git passwall_luci https://github.com/Openwrt-Passwall/openwrt-passwall.git;main" >> ./feeds.conf.default
-      # echo "src-git passwall2_luci https://github.com/Openwrt-Passwall/openwrt-passwall2.git;main" >> ./feeds.conf.default
-      # immoralwrt 默认添加了 passwall,若要使用 passwall2,只需最后一行 passwall2_luci 去掉注释即可，官方查询：https://github.com/immortalwrt/luci/tree/master/applications
-                
+        # ======== 编译 passwall 最新版 =========
+        #cd immortalwrt
+        # immortalwrt插件库已经包含 passwall，不建议自编译 passwall最新版，可能造成固件的不稳定，建议使用 immortalwrt官方源码，打开 immortalwrt官方插件库查询：https://github.com/immortalwrt/immortalwrt（选择 openwrt-24.10分支，打开 feeds.conf.default文件，再打开luci仓库找到“applications”查询插件）
+        # 若要编译 passwall最新版，去掉注释，再注释掉上面的 helloworld，此命令会在 feeds.conf.default文件，第 1 行插入 passwall_packages
+        #sed -i '1i src-git my_passwall_packages https://github.com/Openwrt-Passwall/openwrt-passwall-packages.git;main' feeds.conf.default
+
+        # 再次在 feeds.conf.default文件，第 1 行插入 passwall_luci (这样它就变成了第 1 行，packages 变成了第 2 行)
+        #sed -i '1i src-git my_passwall_luci https://github.com/Openwrt-Passwall/openwrt-passwall.git;main' feeds.conf.default
+
+        # passwall 和 passwall2 不要一起编译，编译出来的固件会不稳定，若要使用 passwall2，先注释上面 passwall_luci，再去掉下面注释，打开 immortalwrt官方插件库查询：https://github.com/immortalwrt/immortalwrt（选择 openwrt-24.10分支，打开 feeds.conf.default文件，再打开luci仓库找到“applications”查询插件）
+        #sed -i '1i src-git my_passwall2_luci https://github.com/Openwrt-Passwall/openwrt-passwall2.git;main' feeds.conf.default
+
+    # immoralwrt 默认添加了 OpenClash，若要编译最新版，去掉下面注释，会自动忽略源码旧版本，但必须放在运行更新 feeds 命令之前，打开 immortalwrt官方插件库查询：https://github.com/immortalwrt/immortalwrt（选择 openwrt-24.10分支，打开 feeds.conf.default文件，再打开luci仓库找到“applications”查询插件）
+    #- name: Import external feeds - OpenClash
+    #  working-directory: ./immortalwrt
+    #  run: |
+    #    git clone --depth=1 https://github.com/vernesong/OpenClash.git package/OpenClash
+    #    mv package/OpenClash/luci-app-openclash package
+    #    rm -rf package/OpenClash  
+        
+    # 范例 1: 注意拉取命令的保存路径
+    #- name: Import external feeds - OpenAppFilter
+    #  working-directory: ./immortalwrt
+    #  run: |
+    #    git clone https://github.com/destan19/OpenAppFilter.git package/OpenAppFilter
+        
     - name: Update feeds
       working-directory: ./immortalwrt
       run: |
@@ -116,46 +136,6 @@ jobs:
       working-directory: ./immortalwrt
       run: |
         ./scripts/feeds install -a
-
-    # immoralwrt 默认添加了 OpenClash
-    #- name: Import external feeds - OpenClash
-    #  working-directory: ./immortalwrt
-    #  run: |
-    #    git clone --depth=1 https://github.com/vernesong/OpenClash.git package/OpenClash
-    #    mv package/OpenClash/luci-app-openclash package
-    #    rm -rf package/OpenClash  
-
-    # msd_lite 必须放在feeds命令后，immoralwrt 默认添加了 msd_lite，使用 msd_lite 收看 IPTV
-    #- name: Import external feeds - msd_lite
-    #  working-directory: ./immortalwrt
-    #  run: |
-    #    git clone https://github.com/ximiTech/luci-app-msd_lite.git package/luci-app-msd_lite
-    #    rm -rf feeds/packages/net/msd_lite
-    #    git clone https://github.com/ximiTech/msd_lite.git feeds/packages/net/msd_lite
-
-    # 如果添加上方的 msd_lite，需要再次运行更新feeds命令    
-    #- name: Update feeds
-    #  working-directory: ./immortalwrt
-    #  run: |
-    #    ./scripts/feeds update -a
-        
-    #- name: Install feeds
-    #  working-directory: ./immortalwrt
-    #  run: |
-    #    ./scripts/feeds install -a
-        
-    # 范例 1: 注意拉取命令的保存路径
-    #- name: Import external feeds - OpenAppFilter
-    #  working-directory: ./immortalwrt
-    #  run: |
-    #    git clone https://github.com/destan19/OpenAppFilter.git package/OpenAppFilter
-
-    # 范例 2: argon皮肤必须放在feeds命令后，注意保存路径是feeds，替换原有的argon皮肤，如果Lean全部取消了argon皮肤，需要更改保存路径到package/luci-theme-argon
-    #- name: Import external feeds - luci-theme-argon
-    #  working-directory: ./immortalwrt
-    #  run: |
-    #    rm -rf feeds/luci/themes/luci-theme-argon
-    #    git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git feeds/luci/themes/luci-theme-argon    
 
     - name: Configuration Customization - Build_ax6000_immortalwrt
       env:
