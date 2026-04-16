@@ -121,12 +121,7 @@ jobs:
     #  working-directory: ./immortalwrt
     #  run: |
     #    git clone https://github.com/destan19/OpenAppFilter.git package/OpenAppFilter
-
-      # echo "src-git passwall_packages https://github.com/Openwrt-Passwall/openwrt-passwall-packages.git;main" >> ./feeds.conf.default
-      # echo "src-git passwall_luci https://github.com/Openwrt-Passwall/openwrt-passwall.git;main" >> ./feeds.conf.default
-      # echo "src-git passwall2_luci https://github.com/Openwrt-Passwall/openwrt-passwall2.git;main" >> ./feeds.conf.default
-      # immoralwrt 默认添加了 passwall,若要使用 passwall2,只需最后一行 passwall2_luci 去掉注释即可，官方查询：https://github.com/immortalwrt/luci/tree/master/applications
-                 
+            
     - name: Update feeds
       working-directory: ./immortalwrt
       run: |
