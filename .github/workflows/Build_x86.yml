@@ -109,6 +109,11 @@ jobs:
     #  run: |
     #    git clone https://github.com/destan19/OpenAppFilter.git package/OpenAppFilter
 
+    - name: Import external feeds - poweroff
+      working-directory: ./openwrt
+      run: |
+        git clone https://github.com/sky2016cn/luci-app-poweroff.git package/luci-app-poweroff   
+
     - name: Update feeds
       working-directory: ./openwrt
       run: |
@@ -123,11 +128,6 @@ jobs:
       working-directory: ./openwrt
       run: |
         ./scripts/feeds install -a
-
-    - name: Import external feeds - poweroff
-      working-directory: ./openwrt
-      run: |
-        git clone https://github.com/sky2016cn/luci-app-poweroff.git package/luci-app-poweroff   
 
     - name: Configuration Customization - Build_x86
       env:
