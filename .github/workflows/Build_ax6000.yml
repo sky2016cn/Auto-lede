@@ -84,11 +84,18 @@ jobs:
         git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
         cd openwrt
         echo "src-git helloworld https://github.com/fw876/helloworld.git" >> ./feeds.conf.default
+      # Lede插件库已经包含passwall,没必要再添加passwall，Lede插件库官方查询：https://github.com/coolsnowwolf/luci/tree/master/applications
         echo "src-git my_passwall_packages https://github.com/Openwrt-Passwall/openwrt-passwall-packages.git;main" >> ./feeds.conf.default
         echo "src-git my_passwall_luci https://github.com/Openwrt-Passwall/openwrt-passwall.git;main" >> ./feeds.conf.default
-      # echo "src-git my_passwall2_luci https://github.com/Openwrt-Passwall/openwrt-passwall2.git;main" >> ./feeds.conf.default
-      # 若要使用 passwall2,最后一行 passwall2_luci 去掉注释即可，官方查询：https://github.com/coolsnowwolf/luci/tree/master/applications
-      
+      #echo "src-git my_passwall2_luci https://github.com/Openwrt-Passwall/openwrt-passwall2.git;main" >> ./feeds.conf.default
+      #passwall和passwall2不要一起编译，编译出来的固件会不稳定，若要使用 passwall2,最后一行 passwall2_luci 去掉注释即可，Lede插件库官方查询：https://github.com/coolsnowwolf/luci/tree/master/applications
+
+    # 范例 1: 注意拉取命令的保存路径
+    #- name: Import external feeds - OpenAppFilter
+    #  working-directory: ./openwrt
+    #  run: |
+    #    git clone https://github.com/destan19/OpenAppFilter.git package/OpenAppFilter
+
     - name: Update feeds
       working-directory: ./openwrt
       run: |
