@@ -123,7 +123,7 @@ jobs:
       run: |
         ./scripts/feeds install -a
 
-    # immoralwrt 默认添加了 OpenClash，若要编译最新版，去掉下面注释，会先删除源码旧版本，再重新拉取 openclash最新版，打开 immortalwrt官方插件库查询：https://github.com/immortalwrt/immortalwrt（选择 openwrt-24.10分支，打开 feeds.conf.default文件，再打开luci仓库找到“applications”查询插件）
+    # immoralwrt 默认添加了 OpenClash，若要编译最新版，必须feeds命令之后，去掉下面注释，会先删除源码旧版本，再重新拉取 openclash最新版，打开 immortalwrt官方插件库查询：https://github.com/immortalwrt/immortalwrt（选择 openwrt-24.10分支，打开 feeds.conf.default文件，再打开luci仓库找到“applications”查询插件）
     #- name: Import external feeds - OpenClash
     #  working-directory: ./immortalwrt
     #  run: |
