@@ -127,7 +127,7 @@ jobs:
     #- name: Import external feeds - OpenClash
     #  working-directory: ./immortalwrt
     #  run: |
-        # 先删除 feeds安装命令中的 OpenClash旧版
+        # 先删除feeds安装命令中创建的OpenClash旧版软链接
     #    ./scripts/feeds uninstall luci-app-openclash
         # 再重新拉取 openclash最新版
     #    git clone --depth=1 https://github.com/vernesong/OpenClash.git package/OpenClash
