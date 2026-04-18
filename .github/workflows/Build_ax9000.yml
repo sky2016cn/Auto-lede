@@ -114,7 +114,8 @@ jobs:
       run: |
         ./scripts/feeds install -a
 
-    # 范例 1: 注意拉取命令的保存路径
+    # 范例 1: 注意拉取命令的保存路径，添加源码中没有的第三方插件，必须放在 feeds命令之后，打开Lede官方插件库查询：https://github.com/coolsnowwolf/lede/blob/master/feeds.conf.default（打开luci仓库找到“applications”查询插件）
+    #- name: Import external feeds - OpenAppFilter
     #- name: Import external feeds - OpenAppFilter
     #  working-directory: ./openwrt
     #  run: |
