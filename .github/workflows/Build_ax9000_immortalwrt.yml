@@ -107,6 +107,12 @@ jobs:
 
         # 再次在 feeds.conf.default文件，第 1 行插入 passwall_packages (这样 packages 就变成了第 1 行，上面 luci 变成了第 2 行)
         #sed -i '1i src-git my_passwall_packages https://github.com/Openwrt-Passwall/openwrt-passwall-packages.git;main' feeds.conf.default
+
+    # 范例 1: 注意拉取命令的保存路径
+    #- name: Import external feeds - OpenAppFilter
+    #  working-directory: ./immortalwrt
+    #  run: |
+    #    git clone https://github.com/destan19/OpenAppFilter.git package/OpenAppFilter
             
     - name: Update feeds
       working-directory: ./immortalwrt
@@ -122,23 +128,6 @@ jobs:
       working-directory: ./immortalwrt
       run: |
         ./scripts/feeds install -a
-
-    # immoralwrt 默认添加了 OpenClash，若要编译最新版，必须feeds命令之后，去掉下面注释，会先删除源码旧版本，再重新拉取 openclash最新版，打开 immortalwrt官方插件库查询：https://github.com/immortalwrt/immortalwrt（选择 openwrt-24.10分支，打开 feeds.conf.default文件，再打开luci仓库找到“applications”查询插件）
-    #- name: Import external feeds - OpenClash
-    #  working-directory: ./immortalwrt
-    #  run: |
-        # 先删除feeds安装命令中创建的OpenClash旧版软链接
-    #    ./scripts/feeds uninstall luci-app-openclash
-        # 再重新拉取 openclash最新版
-    #    git clone --depth=1 https://github.com/vernesong/OpenClash.git package/OpenClash
-    #    mv package/OpenClash/luci-app-openclash package
-    #    rm -rf package/OpenClash  
-        
-    # 范例 1: 注意拉取命令的保存路径
-    #- name: Import external feeds - OpenAppFilter
-    #  working-directory: ./immortalwrt
-    #  run: |
-    #    git clone https://github.com/destan19/OpenAppFilter.git package/OpenAppFilter
 
     - name: Configuration Customization - Build_ax9000_immortalwrt
       env:
