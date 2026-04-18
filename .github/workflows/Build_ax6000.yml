@@ -98,13 +98,7 @@ jobs:
         # ======== 编译 OpenClash =========
         # Lede插件库已经包含 OpenClash，禁止自行替换旧版，造成固件不稳定。若源码删除了OpenClash，使用以下命令自行编译，打开Lede官方插件库查询：https://github.com/coolsnowwolf/lede/blob/master/feeds.conf.default（打开luci仓库找到“applications”查询插件）
         #echo "src-git openclash https://github.com/vernesong/OpenClash.git" >> ./feeds.conf.default
-        
-    # 范例 1: 注意拉取命令的保存路径
-    #- name: Import external feeds - OpenAppFilter
-    #  working-directory: ./openwrt
-    #  run: |
-    #    git clone https://github.com/destan19/OpenAppFilter.git package/OpenAppFilter
-        
+               
     - name: Update feeds
       working-directory: ./openwrt
       run: |
@@ -119,6 +113,12 @@ jobs:
       working-directory: ./openwrt
       run: |
         ./scripts/feeds install -a
+
+    # 范例 1: 添加源码中没有的第三方插件，必须放在 feeds命令之后，注意拉取命令的保存路径
+    #- name: Import external feeds - OpenAppFilter
+    #  working-directory: ./openwrt
+    #  run: |
+    #    git clone https://github.com/destan19/OpenAppFilter.git package/OpenAppFilter
 
     - name: Configuration Customization - Build_ax6000
       env:
